@@ -51,22 +51,22 @@ def interact_with_facebook(cookies, action_url):
 if __name__ == "__main__":
     # Cookies Facebook (assurez-vous de les garder sécurisés et privés)
     cookies = [
-        {"key": "dbln", "value": "KzkiEt2X", "domain": "facebook.com", "path": "/login/device-based/", "hostOnly": False},
+        {"key": "dbln", "value": "%7B%22100029553424992%22%3A%22KzkiEt2X%22%7D", "domain": "facebook.com", "path": "/login/device-based/", "hostOnly": False},
         {"key": "datr", "value": "oeO8ZvmLSKkzwUU4WU99_0hW", "domain": "facebook.com", "path": "/", "hostOnly": False},
         {"key": "sb", "value": "oeO8ZnwVcTyLfyJYBVb61qu8", "domain": "facebook.com", "path": "/", "hostOnly": False},
         {"key": "ps_l", "value": "1", "domain": "facebook.com", "path": "/", "hostOnly": False},
         {"key": "ps_n", "value": "1", "domain": "facebook.com", "path": "/", "hostOnly": False},
         {"key": "locale", "value": "fr_FR", "domain": "facebook.com", "path": "/", "hostOnly": False},
-        {"key": "vpd", "value": "v1;675x360x2", "domain": "facebook.com", "path": "/", "hostOnly": False},
+        {"key": "vpd", "value": "v1%3B675x360x2", "domain": "facebook.com", "path": "/", "hostOnly": False},
         {"key": "c_user", "value": "100029553424992", "domain": "facebook.com", "path": "/", "hostOnly": False},
-        {"key": "xs", "value": "8:nNSAkz-nqv1HrQ:2:1724531539:-1:9694", "domain": "facebook.com", "path": "/", "hostOnly": False},
+        {"key": "xs", "value": "8%3AnNSAkz-nqv1HrQ%3A2%3A1724531539%3A-1%3A9694", "domain": "facebook.com", "path": "/", "hostOnly": False},
         {"key": "oo", "value": "v1", "domain": "facebook.com", "path": "/", "hostOnly": False},
         {"key": "m_page_voice", "value": "100029553424992", "domain": "facebook.com", "path": "/", "hostOnly": False},
         {"key": "m_pixel_ratio", "value": "2", "domain": "facebook.com", "path": "/", "hostOnly": False},
+        {"key": "x-referer", "value": "eyJyIjoiLyIsImgiOiIvIiwicyI6Im0ifQ%3D%3D", "domain": "facebook.com", "path": "/", "hostOnly": False},
         {"key": "wd", "value": "360x675", "domain": "facebook.com", "path": "/", "hostOnly": False},
-        {"key": "x-referer", "value": "eyJyIjoiLyIsImgiOiIvIiwicyI6Im0ifQ==", "domain": "facebook.com", "path": "/", "hostOnly": False},
-        {"key": "wl_cbv", "value": "v2;client_version:2602;timestamp:1724555711", "domain": "facebook.com", "path": "/", "hostOnly": False},
-        {"key": "fbl_st", "value": "100723993;T:28742595", "domain": "facebook.com", "path": "/", "hostOnly": False}
+        {"key": "fbl_st", "value": "100731513%3BT%3A28742615", "domain": "facebook.com", "path": "/", "hostOnly": False},
+        {"key": "wl_cbv", "value": "v2%3Bclient_version%3A2602%3Btimestamp%3A1724556919", "domain": "facebook.com", "path": "/", "hostOnly": False}
     ]
 
     # URL de l'action Facebook (exemple pour vérifier le profil)
