@@ -47,7 +47,7 @@ def interact_with_facebook(appstate, action_url):
 # Exemple d'utilisation combinée
 if __name__ == "__main__":
     # Ton AppState ici (assure-toi de le garder sécurisé et privé)
-    appstate = "[
+    appstate = """[
     {
         "key": "dbln",
         "value": "%7B%2261555318201997%22%3A%224phfneZB%22%2C%2261555169777484%22%3A%22B4B3Mxha%22%2C%22100029553424992%22%3A%22PwJB6PO7%22%2C%2261565180930153%22%3A%22XZOZIwdo%22%7D",
@@ -191,17 +191,26 @@ if __name__ == "__main__":
         "hostOnly": false,
         "creation": "2024-08-25T02:59:48.235Z",
         "lastAccessed": "2024-08-25T02:59:48.235Z"
+    },
+    {
+        "key": "datr",
+        "value": "1kONVv5HqN2nRZYGMkJftJef",
+        "domain": "facebook.com",
+        "path": "/",
+        "hostOnly": false,
+        "creation": "2024-08-25T02:59:48.235Z",
+        "lastAccessed": "2024-08-25T02:59:48.235Z"
     }
-    ]"
-
-    # URL de l'action Facebook (par exemple, vérifier ton profil)
-    facebook_url = "https://www.facebook.com/me"
-
-    # Interagir avec Facebook
-    facebook_response = interact_with_facebook(appstate, facebook_url)
+]"""
+    
+    # URL d'action de Facebook (exemple, adapte selon ton besoin)
+    action_url = "https://facebook.com/some_action"
+    
+    # Exemple d'interaction avec l'API Llama
+    prompt = "Bonjour, comment ça va ?"
+    llama_response = interact_with_llama_api(prompt)
+    print("Llama API Response:", llama_response)
+    
+    # Exemple d'interaction avec Facebook
+    facebook_response = interact_with_facebook(appstate, action_url)
     print("Facebook Response:", facebook_response)
-
-    # Saisir un prompt pour l'API ChatGPT
-    prompt = input("Enter your prompt: ")
-    chatgpt_response = interact_with_llama_api(prompt)
-    print("API Response:", chatgpt_response)
