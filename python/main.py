@@ -1,82 +1,53 @@
 import requests
+from requests.cookies import cookiejar_from_dict
 
-# Fonction pour interagir avec l'API Llama
-def interact_with_llama_api(prompt):
-    # Encoder le prompt pour l'utiliser dans l'URL de l'API
-    encoded_prompt = requests.utils.quote(prompt)
-    
-    # Construire l'URL avec le prompt encodé
-    api_url = f"https://llama3-70b.vercel.app/api?ask={encoded_prompt}"
-    
-    try:
-        # Envoyer la requête GET à l'API
-        response = requests.get(api_url)
-        
-        # Vérifier si la réponse est valide
-        if response.status_code == 200:
-            data = response.json()
-            if "response" in data:
-                return data["response"]
-            else:
-                return "No response field found in API response."
-        else:
-            return f"Failed to fetch data from API. Status code: {response.status_code}"
-    
-    except Exception as e:
-        return f"An error occurred: {str(e)}"
+# URL de l'API de Facebook pour envoyer des messages
+SEND_MESSAGE_URL = 'https://www.facebook.com/messages/send/'
 
-# Fonction pour interagir avec Facebook en utilisant les cookies
-def interact_with_facebook(cookies, action_url):
-    headers = {
-        'User-Agent': 'Mozilla/5.0'
+# Cookies de session
+COOKIES = {
+    'dbln': '%7B%22100029553424992%22%3A%22KzkiEt2X%22%7D',
+    'datr': 'oeO8ZvmLSKkzwUU4WU99_0hW',
+    'sb': 'oeO8ZnwVcTyLfyJYBVb61qu8',
+    'ps_l': '1',
+    'ps_n': '1',
+    'locale': 'fr_FR',
+    'vpd': 'v1%3B675x360x2',
+    'c_user': '100029553424992',
+    'xs': '8%3AnNSAkz-nqv1HrQ%3A2%3A1724531539%3A-1%3A9694',
+    'oo': 'v1',
+    'm_page_voice': '100029553424992',
+    'm_pixel_ratio': '2',
+    'x-referer': 'eyJyIjoiLyIsImgiOiIvIiwicyI6Im0ifQ%3D%3D',
+    'wd': '360x675',
+    'fbl_st': '100731513%3BT%3A28742615',
+    'wl_cbv': 'v2%3Bclient_version%3A2602%3Btimestamp%3A1724556919'
+}
+
+# Fonction pour envoyer un message
+def envoyer_message(destinataire_id, message_text):
+    session = requests.Session()
+    session.cookies = cookiejar_from_dict(COOKIES)
+
+    # Préparer les données du message
+    form_data = {
+        'to': destinataire_id,
+        'body': message_text
     }
-    
-    # Construire le champ Cookie pour la requête
-    cookies_header = '; '.join([f"{cookie['key']}={cookie['value']}" for cookie in cookies])
-    headers['Cookie'] = cookies_header
 
-    try:
-        # Envoyer une requête GET à Facebook en utilisant les cookies
-        response = requests.get(action_url, headers=headers)
-        
-        if response.status_code == 200:
-            return response.text
-        else:
-            return f"Failed to perform Facebook action. Status code: {response.status_code}"
+    # Envoyer le message
+    response = session.post(SEND_MESSAGE_URL, data=form_data)
     
-    except Exception as e:
-        return f"An error occurred while interacting with Facebook: {str(e)}"
+    if response.status_code == 200:
+        print(f"Message envoyé à {destinataire_id}: {message_text}")
+    else:
+        print(f"Erreur lors de l'envoi du message: {response.status_code} {response.text}")
 
-# Exemple d'utilisation combinée
+# Exemple d'utilisation
+def main():
+    destinataire_id = '100029553424992'  # ID du destinataire
+    message_text = "Bonjour, je suis un Chatbot."
+    envoyer_message(destinataire_id, message_text)
+
 if __name__ == "__main__":
-    # Cookies Facebook (assurez-vous de les garder sécurisés et privés)
-    cookies = [
-        {"key": "dbln", "value": "%7B%22100029553424992%22%3A%22KzkiEt2X%22%7D", "domain": "facebook.com", "path": "/login/device-based/", "hostOnly": False},
-        {"key": "datr", "value": "oeO8ZvmLSKkzwUU4WU99_0hW", "domain": "facebook.com", "path": "/", "hostOnly": False},
-        {"key": "sb", "value": "oeO8ZnwVcTyLfyJYBVb61qu8", "domain": "facebook.com", "path": "/", "hostOnly": False},
-        {"key": "ps_l", "value": "1", "domain": "facebook.com", "path": "/", "hostOnly": False},
-        {"key": "ps_n", "value": "1", "domain": "facebook.com", "path": "/", "hostOnly": False},
-        {"key": "locale", "value": "fr_FR", "domain": "facebook.com", "path": "/", "hostOnly": False},
-        {"key": "vpd", "value": "v1%3B675x360x2", "domain": "facebook.com", "path": "/", "hostOnly": False},
-        {"key": "c_user", "value": "100029553424992", "domain": "facebook.com", "path": "/", "hostOnly": False},
-        {"key": "xs", "value": "8%3AnNSAkz-nqv1HrQ%3A2%3A1724531539%3A-1%3A9694", "domain": "facebook.com", "path": "/", "hostOnly": False},
-        {"key": "oo", "value": "v1", "domain": "facebook.com", "path": "/", "hostOnly": False},
-        {"key": "m_page_voice", "value": "100029553424992", "domain": "facebook.com", "path": "/", "hostOnly": False},
-        {"key": "m_pixel_ratio", "value": "2", "domain": "facebook.com", "path": "/", "hostOnly": False},
-        {"key": "x-referer", "value": "eyJyIjoiLyIsImgiOiIvIiwicyI6Im0ifQ%3D%3D", "domain": "facebook.com", "path": "/", "hostOnly": False},
-        {"key": "wd", "value": "360x675", "domain": "facebook.com", "path": "/", "hostOnly": False},
-        {"key": "fbl_st", "value": "100731513%3BT%3A28742615", "domain": "facebook.com", "path": "/", "hostOnly": False},
-        {"key": "wl_cbv", "value": "v2%3Bclient_version%3A2602%3Btimestamp%3A1724556919", "domain": "facebook.com", "path": "/", "hostOnly": False}
-    ]
-
-    # URL de l'action Facebook (exemple pour vérifier le profil)
-    facebook_url = "https://www.facebook.com/me"
-
-    # Interagir avec Facebook
-    facebook_response = interact_with_facebook(cookies, facebook_url)
-    print("Facebook Response:", facebook_response)
-
-    # Saisir un prompt pour l'API Llama
-    prompt = input("Enter your prompt: ")
-    chatgpt_response = interact_with_llama_api(prompt)
-    print("API Response:", chatgpt_response)
+    main()
